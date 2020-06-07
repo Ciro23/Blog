@@ -1,0 +1,160 @@
+@import "variables.scss";
+
+// common style for all the pages
+html {
+    background-color: $mainLight;
+}
+
+html.dark {
+    background-color: $mainDark;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Arimo', sans-serif;
+    outline: none;
+}
+
+.mega-box {
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 300px;
+}
+
+a {
+    text-decoration: none;
+}
+
+select {
+    cursor: pointer;
+}
+
+hr {
+    border: none;
+    height: 1.2px;
+    background-color: $hrLight;
+}
+
+html.dark hr {
+    background-color: $hrDark;
+}
+
+.error {
+    color: $errorLight;
+}
+
+html.dark .error {
+    color: $errorDark;
+}
+
+// style for the show-more button
+.show-more-flex {
+    display: flex;
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.show-more-flex hr {
+    width: calc((100% - 120px) / 2);
+    margin: 17.5px 0;
+}
+
+.show-more-flex button {
+    width: 120px;
+    height: 35px;
+    margin: 0 20px;
+    color: $showmoreLight;
+    border: solid 2px $showmoreLight;
+    background-color: inherit;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.1s ease-in-out;
+}
+
+.show-more-flex button:hover {
+    color: $mainLight;
+    background-color: $showmoreLight;
+}
+
+html.dark .show-more-flex button {
+    color: $showmoreDark;
+    border-color: $showmoreDark;
+}
+
+html.dark .show-more-flex button:hover {
+    color: $mainDark;
+    background-color: $showmoreDark;
+}
+// end of show-more button style
+
+// style for the delete button
+.delete-form {
+    display: inline-block;
+}
+
+.button {
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: 0.1s ease-in-out;
+    border: none;
+    cursor: pointer;
+    border: solid 2px;
+}
+
+.edit-button {
+    background-color: white;
+    color: #9c9c9c;
+    border-color: #9c9c9c;
+    margin-right: 15px;
+}
+
+.edit-button:hover {
+    color: $mainLight;
+    background-color: #9c9c9c;
+}
+
+.delete-button, .delete-yes, .delete-no {
+    color: $mainLight;
+    background-color: $deleteButton;
+    border-color: $deleteButton;
+}
+
+.delete-button:hover {
+    background-color: $deleteButtonHover;
+    border-color: $deleteButtonHover;
+}
+
+.delete-yes, .delete-no {
+    display: none;
+}
+
+.delete-yes:hover, .delete-no:hover {
+    background-color: $deleteConfirmHover;
+    border-color: $deleteConfirmHover;
+    color: $mainLight;
+}
+
+.delete-yes {
+    background-color: inherit;
+    border-color: $deleteButton;
+    color: $deleteButton;
+}
+
+.delete-no {
+    margin-left: 7px;
+}
+// end of delete button stle
+
+@media only screen and (max-width: 599px) {
+    .mega-box {
+        margin-top: 2vw;
+    }
+}

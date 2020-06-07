@@ -1,0 +1,269 @@
+@import "variables.scss";
+
+body {
+    min-height: auto;
+}
+
+.signup-login {
+    opacity: 0;
+    width: 470px;
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login,
+.signup {
+    padding: 30px 0 50px;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* start of general utilities */
+.utilities {
+    width: 100%;
+    margin-top: 6px;
+    display: flex;
+}
+
+.utilities a {
+    font-size: 15px;
+    font-family: "Arimo", sans-serif;
+    text-decoration: none;
+    transition: 0.1s ease-in-out;
+}
+
+.signup + .utilities,
+.login + .utilities {
+    justify-content: space-around;
+}
+/* end of general utilities */
+
+/* start of first flex */
+.first-flex img {
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+.first-flex h2 {
+    text-align: center;
+    font-size: 22px;
+    margin: 10px 0;
+    font-family: "Signika", sans-serif;
+    font-weight: 400;
+}
+
+.error {
+    text-align: center;
+    font-size: 16px;
+    font-family: "Raleway", sans-serif;
+    margin-top: 10px;
+}
+
+.first-flex form {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.first-flex form label {
+    font-family: "Raleway", sans-serif;
+    font-size: 14px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.first-flex input[type="text"],
+.first-flex input[type="password"]  {
+    display: block;
+    margin: 5px 0 15px;
+    width: 100%;
+    height: 35px;
+    border-radius: 3px;
+    border: none;
+    padding: 5px 10px;
+    border: solid 1px;
+    outline: none;
+}
+
+.first-flex input[type="text"]:focus,
+.first-flex input[type="password"]:focus {
+    outline: solid 1px;
+}
+
+.first-flex input[type="submit"] {
+    padding: 12px 45px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 3px;
+    font-size: 15.5px;
+    font-family: "Roboto", sans-serif;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+}
+/* end of first flex */
+
+// media query for smartphones
+@media only screen and (max-width: 599px) {
+    .signup-login {
+        top: 50%;
+        width: 85%;
+        opacity: 100%;
+    }
+    
+    .login,
+    .signup {
+        padding: 5vw 0 7vw;
+        border-radius: 1vw;
+    }
+    
+    /* start of general utilities */
+    .utilities {
+        margin: 1vw 0 15vw;
+    }
+    
+    .utilities a {
+        font-size: 3.1vw;
+    }
+    /* end of general utilities */
+    
+    /* start of first flex */
+    .first-flex img {
+        width: 22vw;
+        border-radius: 1vw;
+    }
+    
+    .first-flex h2 {
+        font-size: 4vw;
+        margin: 2vw 0;
+    }
+    
+    .error {
+        font-size: 3.1vw;
+        margin-top: 2vw;
+    }
+    
+    .first-flex form {
+        width: 90%;
+        margin-top: 3vw;
+    }
+    
+    .first-flex form label {
+        font-size: 2.6vw;
+    }
+    
+    .first-flex input[type="text"],
+    .first-flex input[type="password"]  {
+        margin: 2vw 0 3vw;
+        height: 8vw;
+        border-radius: 1vw;
+        padding: 1vw 2vw;
+        border: solid 0.1vw;
+    }
+    
+    .first-flex input[type="text"]:focus,
+    .first-flex input[type="password"]:focus {
+        outline: solid 0.1vw;
+    }
+    
+    .first-flex input[type="submit"] {
+        padding: 2.9vw 10vw;
+        margin-top: 4vw;
+        font-size: 3.3vw;
+        border-radius: 7vw;
+    }
+    /* end of first flex */
+}
+
+/* light colors */
+.login,
+.signup {
+    background-color: $secondLight;
+}
+
+.utilities a {
+    color: $thirdDark;
+}
+
+.utilities a:hover {
+    opacity: 80%;
+}
+
+.error {
+    color: $errorLight;
+}
+
+.first-flex input[type="text"],
+.first-flex input[type="password"]  {
+    border-color: $hrLight;
+}
+
+.first-flex input[type="text"]:focus,
+.first-flex input[type="password"]:focus {
+    outline-color: #C1C1C1;
+}
+
+.first-flex input[type="submit"] {
+    color: white;
+    background-color: $mainButtonLight;
+}
+
+.first-flex input[type="submit"]:hover {
+    background-color: $mainButtonHoverLight;
+}
+/* end of light colors */
+
+/* dark colors */
+html.dark .login,
+html.dark .signup {
+    background-color: $secondDark;
+}
+
+html.dark .utilities a {
+    color: $mainLight;
+}
+
+html.dark .utilities a:hover {
+    color: $thirdLight;
+}
+
+html.dark .first-flex h2 {
+    color: $mainLight;
+}
+
+html.dark .error {
+    color: $errorDark;
+}
+
+.first-flex form label {
+    color: $mainLight;
+}
+
+html.dark .first-flex input[type="text"],
+html.dark .first-flex input[type="password"]  {
+    background-color: $secondDark;
+    border-color: $hrDark;
+    color: $mainLight;
+}
+
+html.dark .first-flex input[type="text"]:focus,
+html.dark .first-flex input[type="password"]:focus {
+    outline-color: #C1C1C1;
+}
+
+html.dark .first-flex input[type="submit"] {
+    color: white;
+    background-color: $mainButtonDark;
+}
+
+html.dark .first-flex input[type="submit"]:hover {
+    background-color: $mainButtonHoverDark;
+}
+/* end of dark colors */

@@ -1,0 +1,635 @@
+@import "variables.scss";
+
+// common style
+.mega-box {
+    min-height: 500px;
+    padding: 10px 30px 25px;
+    border-radius: 6px;
+}
+
+#first-mega-box {
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.load-container {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#second-mega-box {
+    margin-top: 0;
+    width: 90%;
+    display: none;
+}
+
+.selection {
+    max-width: 500px;
+    display: flex;
+    user-select: none;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.selection a {
+    transition: 0.1s;
+    width: 140px;
+    display: block;
+    padding: 7px 10px;
+    text-align: center;
+}
+
+.selection a:first-of-type {
+    border-radius: 4px 0 0 4px;
+}
+
+.selection a:last-of-type {
+    border-radius:  0 4px 4px 0;
+}
+
+.mega-box h1 {
+    margin-bottom: 15px;
+    font-size: 30px;
+    line-height: 30px;
+    font-family: 'Baloo Paaji 2', cursive;
+    display: inline-block;
+}
+
+hr {
+    margin: 10px 0 20px;
+    clear: both;
+}
+// end of common style
+
+// post article style
+textarea {
+    width: 100%;
+    resize: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    border-radius: 6px;
+    outline: none;
+    padding: 10px;
+}
+
+textarea:focus{
+    border: solid 1.5px;
+    padding: 9.5px;
+}
+
+textarea[name="title"] {
+    height: 60px;
+}
+
+textarea[name="content"] {
+    min-height: 230px;
+    resize: vertical;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+form span {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#labelForImage {
+    border: solid 1px;
+    border-radius: 4px;
+    padding: 5px 13px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+form select {
+    outline: none;
+    border-radius: 3px;
+    font-size: 15px;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+button[type="submit"] {
+    float: right;
+    border: none;
+    padding: 6px 36px;
+    font-size: 15px;
+    border-radius: 4px;
+    transition: 0.06s ease-in-out;
+    cursor: pointer;
+}
+
+.error {
+    margin-top: 20px;
+}
+// end of post article
+
+// manage topics and users style
+.first-form {
+    display: flex;
+    justify-content: space-between;
+    float: right;
+}
+
+.box input[type='text'],
+.first-form input[type='text'] {
+    padding: 6px 0 6px 8px;
+    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+}
+
+.first-form input[type="text"] {
+    font-size: 15px;
+    margin-right: 7px;
+}
+
+.sort-results {
+    float: right;
+    margin-bottom: 7px;
+}
+
+.sort-results label {
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+.box {
+    position: relative;
+    padding: 15px;
+    display: block;
+    width: calc(100% - 30px);
+    height: 60px;
+    margin-top: 20px;
+    border-radius: 5px;
+    clear: both;
+}
+
+.box span {
+    display: flex;
+    display: inline-block;
+}
+
+.first-form button,
+.box button {
+    background-color: inherit;
+    border: none;
+    vertical-align: middle;
+    border-radius: 3px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.first-form button {
+    padding: 3px 10px;
+}
+
+.first-form button img,
+.box button img {
+    user-select: none;
+    height: 22px;
+}
+
+.box p {
+    position: absolute;
+    bottom: 14px;
+}
+
+.box .bottom-form {
+    position: absolute;
+    bottom: 12px;
+    left: 60px;
+}
+
+.box .bottom-form select {
+    padding: 3px 5px;
+    border-radius: 3px;
+}
+
+.box .bottom-form button img {
+    height: 18px;
+}
+
+.box .side-form {
+    float: right;
+}
+// manage topics and users style
+
+// pagination style
+.pagination {
+    display: table;
+    margin: 0 auto;
+    margin-top: 30px;
+    user-select: none;
+}
+
+.pagination a {
+    margin-left: 5px;
+    padding: 6px 10.5px;
+    border-radius: 4px;
+}
+
+#prev:after {
+    margin-left: 0;
+    background-image: url("/png_icons/left-arrow.png");
+}
+
+#following:after {
+    background-image: url("/png_icons/right-arrow.png");
+}
+
+#prev:after,
+#following:after {
+    content: "";
+    padding: 6px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+
+#current-page {
+    border: solid 1.3px;
+}
+// end of pagination style
+
+// adjustments for tablets
+@media only screen and (max-width: 850px) {
+    .load-container {
+        width: 100%;
+    }
+
+    .first-form input[type='text'] {
+        width: 160px;
+    }
+}
+// end of adjustments for tablets
+
+// media query for smartphones
+@media only screen and (max-width: 599px) {
+    // common style
+    .mega-box {
+        width: 100%;
+        padding: 0;
+    }
+
+    .selection {
+        width: 90%;
+        display: flex;
+        user-select: none;
+        margin: 3vw auto 7vw auto;
+    }
+    
+    .selection a {
+        padding: 1.8vw 2vw;
+        font-size: 3.2vw;
+    }
+    
+    .selection a:first-of-type {
+        border-radius: 1vw 0 0 1vw;
+    }
+    
+    .selection a:last-of-type {
+        border-radius:  0 1vw 1vw 0;
+    }
+
+    .mega-box h1 {
+        margin-bottom: 3vw;
+        font-size: 5vw;
+        line-height: 5vw;
+    }
+
+    hr {
+        margin: 1.5vw 0 3vw;
+    }
+
+    .load-container {
+        width: 100%;
+    }
+
+    #second-mega-box {
+        padding: 0;
+    }
+    // end of common style
+
+    // post article style
+    textarea {
+        font-size: 3.3vw;
+        margin: 1.5vw 0;
+        border-radius: 1.3vw;
+    }
+
+    textarea[name="title"] {
+        height: 60px;
+    }
+    
+    textarea[name="content"] {
+        min-height: 45vw;
+    }
+
+    form span {
+        flex-direction: column;
+    }
+
+    form span > * {
+        margin-top: 2.5vw;
+    }
+
+    form span > span {
+        margin-top: 0;
+    }
+
+    form select {
+        border-radius: 1vw;
+        font-size: 3.3vw;
+        padding: 1.5vw;
+        margin-right: 0;
+    }
+
+    #labelForImage {
+        border: solid 0.1vw;
+        border-radius: 1vw;
+        padding: 5px 13px;
+        font-size: 3.2vw;
+    }
+    
+    button[type="submit"] {
+        padding: 2vw 0;
+        font-size: 3.5vw;
+        border-radius: 1vw;
+        margin-top: 5vw;
+    }
+
+    .error {
+        margin-top: 20px;
+    }
+    // end of post article
+
+    // manage topics and users style
+    #second-mega-box > h1 {
+        display: block;
+    }
+
+    .first-form {
+        display: block;
+        float: left;
+        margin-top: 3vw;
+    }
+
+    .box input[type='text'],
+    .first-form input[type="text"] {
+        font-size: 3vw;
+        margin-right: 2vw;
+        height: 7vw;
+        font-size: 3vw;
+        border-radius: 1vw;
+    }
+
+    .first-form button {
+        margin-top: 0;
+        font-size: 3vw;
+        height: 7vw;
+        padding: 0 3vw;
+    }
+
+    #hr-topics-users {
+        margin-top: 15vw;
+    }
+
+    .box {
+        padding: 3vw;
+        width: calc(100% - 6vw);
+        height: 15vw;
+        margin-top: 4vw;
+        border-radius: 1.5vw;
+    }
+
+    .first-form button[type="file"],
+    .box button {
+        border-radius: 1vw;
+        padding: 1.3vw;
+    }
+
+    .first-form button[type="file"] img {
+        height: 4.2vw;
+    }
+
+    .box button img,
+    .box .bottom-form button img {
+        height: 5vw;
+    }
+
+    .box p {
+        bottom: 2vw;
+    }
+
+    .box .bottom-form {
+        bottom: 1vw;
+        left: 13vw;
+    }
+
+    .box .bottom-form select {
+        padding: 1vw 2.5vw;
+        border-radius: 1vw;
+    }
+    // end manage topics and users style
+
+    // pagination style
+    .pagination {
+        margin-top: 9vw;
+    }
+
+    .pagination a {
+        font-size: 3.3vw;
+        margin-left: 2vw;
+        padding: 2vw 3vw;
+        border-radius: 1vw;
+    }
+
+    #prev:after,
+    #following:after {
+        padding: 1.5vw 1.5vw;
+        background-size: 4.5vw;
+    }
+
+    #current-page {
+        border: solid 0.1vw;
+    }
+    // end of pagination style
+}
+// end of media query for smartphones
+
+// light colors
+textarea {
+    border-color: $thirdLight;
+}
+
+textarea:focus {
+    border-color: $thirdDark;
+}
+
+#labelForImage {
+    border-color: $mainDark;
+    color: $mainDark;
+}
+
+button[type="submit"] {
+    color: white;
+    background-color: $mainButtonLight;
+}
+
+button[type="submit"]:hover {
+    background-color: $mainButtonHoverLight;
+}
+
+.alt-color {
+    background-color: $altLight;
+}
+
+.box input[type='text'],
+.first-form input[type='text'] {
+    border: solid 0.5px $thirdLight;
+    background-color: $secondLight;
+}
+
+.first-form button[type="file"]:hover,
+.box button:hover {
+    background-color: #cccccc;
+}
+
+.first-form button[type="file"] img,
+.box button img {
+    filter: invert(0.85);
+}
+
+.box a {
+    color: black;
+}
+
+.box a:hover {
+    opacity: 80%;
+}
+
+.box p {
+    opacity: 85%;
+}
+
+.selection a,
+.pagination a {
+    box-shadow: 0px 0px 5px -3px rgba(0,0,0,0.75);
+    color: black;
+    background-color: white;
+}
+
+.selection a:hover,
+.pagination a:hover {
+    background-color: $mainLight;
+}
+
+
+#prev:after,
+#following:after {
+    filter: invert(1);
+}
+
+#current-page {
+    border-color: $thirdDark;
+}
+// end of light colors
+
+// dark colors
+html.dark textarea:focus {
+    border-color: $thirdLight;
+}
+
+html.dark #labelForImage {
+    border-color: $mainLight;
+    color: $mainLight;
+}
+
+html.dark .mega-box h1 {
+    color: $mainLight;
+}
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+    background-color: $secondDark;
+    border-color: $thirdDark;
+    color: $mainLight;
+}
+
+html.dark button[type="submit"] {
+    color: $mainLight;
+    background-color: $mainButtonDark;
+}
+
+html.dark button[type="submit"]:hover {
+    background-color: $mainButtonHoverDark;
+}
+
+html.dark .sort-results label {
+    color: $mainLight;
+}
+
+html.dark .box input[type='text'],
+html.dark .first-form input[type='text'] {
+    color: $mainLight;
+    background-color: $thirdDark;
+    border: none;
+}
+
+html.dark .alt-color {
+    background-color: $altDark;
+}
+
+html.dark .first-form button[type="file"]:hover,
+html.dark .box button:hover {
+    background-color: $thirdDark;
+}
+
+html.dark .first-form button[type="file"] img,
+html.dark form img {
+    filter: invert(0.2);
+}
+
+html.dark .box a {
+    color: $mainLight;
+}
+
+html.dark .box a:hover {
+    color: $thirdLight;
+}
+
+html.dark .box p {
+    color: $thirdLight;
+}
+
+html.dark .selection a,
+html.dark .pagination a {
+    box-shadow: none;
+    color: white;
+    background-color: $thirdDark;
+    border: none;
+}
+
+html.dark .selection a:hover,
+html.dark .pagination a:hover {
+    background-color: $mainButtonDark;
+}
+
+html.dark #prev:after,
+html.dark #following:after {
+    filter: invert(0);
+}
+
+html.dark #current-page {
+    border-color: $mainLight;
+}
+// end of dark colors

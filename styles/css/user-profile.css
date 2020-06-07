@@ -1,0 +1,108 @@
+.mega-box {
+  max-width: 840px;
+  padding: 0 10px;
+  overflow: visible;
+  margin-top: 70px; }
+
+.delete-profile {
+  float: right;
+  margin-bottom: 10px; }
+
+.mega-box > h1 {
+  font-size: 25px;
+  line-height: 25px;
+  font-family: 'Baloo Paaji 2', cursive;
+  display: block;
+  font-weight: 600;
+  clear: both; }
+
+hr {
+  border: none;
+  margin: 10px 0 30px; }
+
+.title {
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.06s ease-in-out;
+  font-family: 'Baloo Paaji 2', cursive;
+  display: inline-block; }
+
+.comment {
+  margin: 0 0 25px 30px;
+  font-size: 15.5px;
+  font-style: italic;
+  font-family: 'Baloo Paaji 2', cursive;
+  line-height: 20px;
+  border-left: solid 1px;
+  padding-left: 10px;
+  word-wrap: break-word; }
+
+hr {
+  background-color: #DFDFDF; }
+
+.title {
+  color: #3d3d3d; }
+
+.title:hover {
+  color: #5c5c5c; }
+
+.comment {
+  color: black;
+  border-color: #d4d4d4; }
+
+.no-comments {
+  color: black;
+  opacity: 80%;
+  float: left; }
+
+@media only screen and (max-width: 599px) {
+  .mega-box {
+    width: 95%;
+    padding: 0;
+    margin-top: 5vw; }
+
+  .mega-box span:first-of-type {
+    margin-bottom: 10px; }
+
+  .mega-box > h1 {
+    font-size: 5.3vw;
+    line-height: 5.3vw; }
+
+  hr {
+    border: none;
+    margin: 3vw 0 5vw; }
+
+  .title {
+    font-size: 4vw; }
+
+  .comment {
+    margin: 0 0 5vw 5vw;
+    font-size: 3.3vw;
+    line-height: 4.5vw;
+    border-left: solid 0.1vw;
+    padding-left: 3vw; }
+
+  .no-comments {
+    font-size: 3.3vw; } }
+html.dark .mega-box > h1 {
+  color: #f9f9f9; }
+
+html.dark hr {
+  background-color: #545454; }
+
+html.dark .title {
+  color: #f9f9f9;
+  opacity: 95%; }
+
+html.dark .title:hover {
+  color: #f9f9f9; }
+
+html.dark .comment {
+  color: #DFDFDF;
+  border-color: #CCCCCC; }
+
+html.dark .no-comments {
+  color: #f9f9f9;
+  opacity: 85%; }
+
+/*# sourceMappingURL=user-profile.css.map */

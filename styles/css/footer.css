@@ -1,0 +1,19 @@
+.footer {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  position: absolute; }
+
+/* light colors */
+.footer {
+  background-color: white; }
+
+/* end of light colors*/
+/* dark colors */
+html.dark .footer {
+  background-color: #202020; }
+
+/* end of dark colors*/
+
+/*# sourceMappingURL=footer.css.map */

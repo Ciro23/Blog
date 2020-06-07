@@ -1,0 +1,126 @@
+html {
+  background-color: #f9f9f9; }
+
+html.dark {
+  background-color: #181818; }
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Arimo', sans-serif;
+  outline: none; }
+
+.mega-box {
+  margin: 0 auto;
+  margin-top: 60px; }
+
+body {
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 300px; }
+
+a {
+  text-decoration: none; }
+
+select {
+  cursor: pointer; }
+
+hr {
+  border: none;
+  height: 1.2px;
+  background-color: #DFDFDF; }
+
+html.dark hr {
+  background-color: #545454; }
+
+.error {
+  color: #ff0011; }
+
+html.dark .error {
+  color: #f03e41; }
+
+.show-more-flex {
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 30px; }
+
+.show-more-flex hr {
+  width: calc((100% - 120px) / 2);
+  margin: 17.5px 0; }
+
+.show-more-flex button {
+  width: 120px;
+  height: 35px;
+  margin: 0 20px;
+  color: #545454;
+  border: solid 2px #545454;
+  background-color: inherit;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: 0.1s ease-in-out; }
+
+.show-more-flex button:hover {
+  color: #f9f9f9;
+  background-color: #545454; }
+
+html.dark .show-more-flex button {
+  color: #DFDFDF;
+  border-color: #DFDFDF; }
+
+html.dark .show-more-flex button:hover {
+  color: #181818;
+  background-color: #DFDFDF; }
+
+.delete-form {
+  display: inline-block; }
+
+.button {
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: 0.1s ease-in-out;
+  border: none;
+  cursor: pointer;
+  border: solid 2px; }
+
+.edit-button {
+  background-color: white;
+  color: #9c9c9c;
+  border-color: #9c9c9c;
+  margin-right: 15px; }
+
+.edit-button:hover {
+  color: #f9f9f9;
+  background-color: #9c9c9c; }
+
+.delete-button, .delete-yes, .delete-no {
+  color: #f9f9f9;
+  background-color: #f05959;
+  border-color: #f05959; }
+
+.delete-button:hover {
+  background-color: #ff0011;
+  border-color: #ff0011; }
+
+.delete-yes, .delete-no {
+  display: none; }
+
+.delete-yes:hover, .delete-no:hover {
+  background-color: #ed3434;
+  border-color: #ed3434;
+  color: #f9f9f9; }
+
+.delete-yes {
+  background-color: inherit;
+  border-color: #f05959;
+  color: #f05959; }
+
+.delete-no {
+  margin-left: 7px; }
+
+@media only screen and (max-width: 599px) {
+  .mega-box {
+    margin-top: 2vw; } }
+
+/*# sourceMappingURL=common.css.map */
