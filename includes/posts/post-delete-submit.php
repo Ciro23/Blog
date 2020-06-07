@@ -14,9 +14,9 @@ if (isset($_POST['delete-submit'])) {
         exit();
     }
 
-    $idPost = $_POST['idPost'];
+    $idPost = mysqli_real_escape_string($db, $_POST['idPost']);
 
-    $resultPost = mysqli_query($db, $sql = "SELECT title, author, topic FROM posts WHERE id = $idPost");
+    $resultPost = mysqli_query($db, $sql = "SELECT title, author, topic FROM posts WHERE id = '$idPost'");
     $rowPost = mysqli_fetch_assoc($resultPost);
 
     // checks if the user deleting the post is its author
@@ -26,8 +26,8 @@ if (isset($_POST['delete-submit'])) {
     }
 
     $idTopic = $rowPost['topic'];
-    mysqli_query($db, $sql = "UPDATE posts SET status = 0 WHERE id = $idPost");
-    mysqli_query($db, $sql = "UPDATE comments SET status = 0 WHERE post = $idPost");
+    mysqli_query($db, $sql = "UPDATE posts SET status = 0 WHERE id = '$idPost'");
+    mysqli_query($db, $sql = "UPDATE comments SET status = 0 WHERE post = '$idPost'");
 
     header("Location: /");
 } else {
