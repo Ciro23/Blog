@@ -5,7 +5,7 @@ if (isset($_POST['signup-submit'])) {
     require "../../general/php-functions.php";
 
     // array containing all user infos
-    $user = array($_POST['username'], $_POST['email'], $_POST['pwd'], $_POST['repwd']);
+    $user = array(mysqli_real_escape_string($db, $_POST['username']), mysqli_real_escape_string($db, $_POST['email']), $_POST['pwd'], $_POST['repwd']);
 
     // checks if slots are not empty
     if (empty($user[0]) || empty($user[1]) || empty($user[2]) || empty($user[3])) {

@@ -4,7 +4,7 @@ if (isset($_POST['login-submit'])) {
     require "../../general/db_conn.php";
     require "../../general/php-functions.php";
 
-    $user = array($_POST['email'], $_POST['pwd']);
+    $user = array(mysqli_real_escape_string($db, $_POST['email']), $_POST['pwd']);
 
     // checks if slots are not empty
     if (empty($user[0]) || empty($user[1])) {
