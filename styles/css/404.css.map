@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,IAAK;EACD,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI;;AAGpB;CACE;EACE,UAAU,EAAE,MAAM;;AAGtB,EAAG;EACC,UAAU,EAAE,KAAK;EACjB,SAAS,EAAE,KAAK;;AAGpB,CAAE;EACE,SAAS,EAAE,IAAI;;AAGnB;WACY;EACR,KAAK,ECtBG,OAAO",
+"sources": ["../scss/404.scss","../scss/variables.scss"],
+"names": [],
+"file": "404.css"
+}
