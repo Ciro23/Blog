@@ -19,11 +19,11 @@ if (isset($_POST['post-article-submit'])) {
 
     // variables containing all post infos
     $uid = $_SESSION['uid'];
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    $type = $_POST['type'];
-    $desc = $_POST['desc'];
-    $topic = $_POST['topic'];
+    $title = mysqli_real_escape_string($db, $_POST['title']);
+    $content = mysqli_real_escape_string($db, $_POST['content']);
+    $type = mysqli_real_escape_string($db, $_POST['type']);
+    $desc = mysqli_real_escape_string($db, $_POST['desc']);
+    $topic = mysqli_real_escape_string($db, $_POST['topic']);
     $image = $_FILES['image']['name'];
     $imageTmp = $_FILES['image']['tmp_name'];
 
@@ -64,15 +64,9 @@ if (isset($_POST['post-article-submit'])) {
         $imageSource = "$protocol{$_SERVER['HTTP_HOST']}/includes/general/post_default.$imageExt";
     }
 
-    $content = addslashes($content);
 
     // format the title
     $titleFormatted = format($title, true);
-    $titleFormatted = addslashes($titleFormatted);
-
-    // format type, description
-    $type = addslashes($type);
-    $desc = addslashes($desc);
 
     // gets the id of the topic
     $resultTopic = mysqli_query($db, $sql = "SELECT id FROM topics WHERE topic = '$topic' AND status = 1");
@@ -87,14 +81,14 @@ if (isset($_POST['post-article-submit'])) {
         $idPost = mysqli_insert_id($db);
     } else {
         // edit the data if the post is being edited
-        $idPost = $_POST['idPost'];
+        $idPost = mysqli_real_escape_string($db, $_POST['idPost']);
 
-        $resultOld = mysqli_query($db, $sql = "SELECT title, image FROM posts WHERE id = $idPost");
+        $resultOld = mysqli_query($db, $sql = "SELECT title, image FROM posts WHERE id = '$idPost'");
         $rowOld = mysqli_fetch_assoc($resultOld);
         $oldTitle = $rowOld['title'];
         $oldTitle = format($oldTitle, true);
 
-        mysqli_query($db, $sql = "UPDATE posts SET title = '$title', content = '$content', topic = '$idTopic', type = '$type', description = '$desc', image = '$imageExt' WHERE id = $idPost");
+        mysqli_query($db, $sql = "UPDATE posts SET title = '$title', content = '$content', topic = '$idTopic', type = '$type', description = '$desc', image = '$imageExt' WHERE id = '$idPost'");
     }
 
     $target = "../../../posts/$titleFormatted-$idPost";
