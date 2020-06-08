@@ -50,12 +50,12 @@ if (isset($_GET["error"])) {
                     opacity: 1,
                 }, "slow");
             }
-        });
             
-       $(window).resize(function() {
-            if ($(window).width() > 599) {
-                $(".signup-login").css("opacity", "100%");
-            }
+            $(window).resize(function() {
+                if ($(window).width() > 599) {
+                    $(".signup-login").css("opacity", "100%");
+                }
+            });
         });
         </script>
     </head>
