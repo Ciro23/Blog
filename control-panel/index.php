@@ -75,11 +75,11 @@ if (isset($_GET['post-article'])) {
         $resultPost = mysqli_query($db, $sql = "SELECT * FROM posts WHERE id = '$idPost'");
         $rowPost = mysqli_fetch_assoc($resultPost);
 
-        $title = $rowPost['title'];
-        $content = $rowPost['content'];
-        $type = $rowPost['type'];
-        $topic = $rowPost['topic'];
-        $desc = $rowPost['description'];
+        $title = addslashes($rowPost['title']);
+        $content = addslashes($rowPost['content']);
+        $type = addslashes($rowPost['type']);
+        $topic = addslashes($rowPost['topic']);
+        $desc = addslashes($rowPost['description']);
 
     } else {
         $idPost = 0;
