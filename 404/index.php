@@ -1,10 +1,10 @@
 <?php
 $includeCheck = true;
-include "../includes/general/db_conn.php";
-include "../includes/general/common.php";
-include "../includes/general/php-functions.php";
-include "../includes/general/js-functions.php";
-include "../includes/general/menu.php";
+require "../includes/general/db_conn.php";
+require "../includes/general/common.php";
+require "../includes/general/php-functions.php";
+require "../includes/general/js-functions.php";
+require "../includes/general/menu.php";
 ?>
 <html lang="en">
     <head>
