@@ -27,7 +27,8 @@ if (isset($_POST['comment-delete-submit'])) {
 
     $titleFormatted = format($titlePost, true);
 
-    if ($rowComment['author'] != $_SESSION['uid'] || getRole($db) < 2) {
+    // checks if the user deleting the comment is its author or an admin
+    if ($rowComment['author'] != $_SESSION['uid'] && getRole($db) < 2) {
         header("Location: /posts/$titleFormatted-$idPost#comments");
         exit();
     }
