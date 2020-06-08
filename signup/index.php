@@ -68,7 +68,6 @@ if (isset($_GET["error"])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/styles/css/login-signup.css">
         <title><?php echo $siteName ?> | Signup</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
         $(document).ready(function() {
             if ($(window).width() > 599) {
