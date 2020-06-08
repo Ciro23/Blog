@@ -23,8 +23,8 @@ if (isset($_POST['delete-submit'])) {
 
     $rowPost = mysqli_fetch_assoc($resultPost);
 
-    // checks if the user deleting the post is its author
-    if ($_SESSION['uid'] != $rowPost['author']) {
+    // checks if the user deleting the post is its author or an admin
+    if ($_SESSION['uid'] != $rowPost['author'] && getRole($db) < 2) {
         $titleFormatted = format($rowPost['title'], true);
         header("Location: /posts/$titleFormatted-$idPost");
     }
