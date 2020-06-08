@@ -82,7 +82,6 @@ if (isset($_GET["error"])) {
                     $(".signup-login").css("opacity", "100%");
                 }
             });
-            
         });
         </script>
     </head>
