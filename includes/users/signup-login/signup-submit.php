@@ -5,7 +5,7 @@ if (isset($_POST['signup-submit'])) {
     require "../../general/php-functions.php";
 
     // array containing all user infos
-    $user = array(mysqli_real_escape_string($db, $_POST['username']), mysqli_real_escape_string($db, $_POST['email']), $_POST['pwd'], $_POST['repwd']);
+    $user = array($_POST['username'], $_POST['email'], $_POST['pwd'], $_POST['repwd']);
 
     // checks if slots are not empty
     if (empty($user[0]) || empty($user[1]) || empty($user[2]) || empty($user[3])) {
@@ -26,7 +26,10 @@ if (isset($_POST['signup-submit'])) {
     }
 
     // checks if the username is already taken
-    $result = mysqli_query($db, $sql = "SELECT id FROM users WHERE username = '$user[0]'");
+    $sql = "SELECT id FROM users WHERE username = ?";
+    $vars = [$user[0]];
+    $varsType = "s";
+    $result = executeStmt($db, $sql, $varsType, $vars);
     if (mysqli_num_rows($result) > 0) {
         header("Location: /signup?error=username-already-taken&name=$user[0]&email=$user[1]");
         exit();
@@ -39,14 +42,16 @@ if (isset($_POST['signup-submit'])) {
     }
 
     // checks if the email already exists in the db
-    $result = mysqli_query($db, $sql = "SELECT id FROM users WHERE email = '$user[1]'");
+    $sql = "SELECT id FROM users WHERE email = ?";
+    $vars = [$user[1]];
+    $result = executeStmt($db, $sql, $varsType, $vars);
     if (mysqli_num_rows($result) > 0) {
         header("Location: /signup?error=email-already-taken&name=$user[0]&email=$user[1]");
         exit();
     }
 
     // checks if password is at least 6 characters long
-    if (strlen($user[2]) < 6 || strlen($user[0]) > 100) {
+    if (strlen($user[2]) < 6 || strlen($user[0]) > 128) {
         header("Location: /signup?error=password-length&name=$user[0]&email=$user[1]");
         exit();
     }
@@ -64,13 +69,13 @@ if (isset($_POST['signup-submit'])) {
     $user[2] = password_hash($user[2], PASSWORD_DEFAULT);
 
     // adds the user to the db
-    mysqli_query($db, $sql = "INSERT INTO users (username, email, password) VALUES ('$user[0]', '$user[1]', '$user[2]')");
+    $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+    $vars = [$user[0], $user[1], $user[2]];
+    $varsType = "sss";
+    executeStmt($db, $sql, $varsType, $vars, false);
 
     // id of the just created user
     $uid = mysqli_insert_id($db);
-
-    // picks the user id from the db
-    $result = mysqli_query($db, $sql = "SELECT id FROM users WHERE username = '$user[0]'");
 
     // creates the user session
     $_SESSION['uid'] = $uid;

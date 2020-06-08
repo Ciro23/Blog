@@ -14,9 +14,13 @@ if (isset($_POST['delete-submit'])) {
         exit();
     }
 
-    $idPost = mysqli_real_escape_string($db, $_POST['idPost']);
+    $idPost = $_POST['idPost'];
 
-    $resultPost = mysqli_query($db, $sql = "SELECT title, author FROM posts WHERE id = '$idPost'");
+    $sql = "SELECT title, author FROM posts WHERE id = ?";
+    $vars = [$idPost];
+    $varsType = "i";
+    $resultPost = executeStmt($db, $sql, $varsType, $vars);
+
     $rowPost = mysqli_fetch_assoc($resultPost);
 
     // checks if the user deleting the post is its author
@@ -25,8 +29,13 @@ if (isset($_POST['delete-submit'])) {
         header("Location: /posts/$titleFormatted-$idPost");
     }
 
-    mysqli_query($db, $sql = "UPDATE posts SET status = 0 WHERE id = '$idPost'");
-    mysqli_query($db, $sql = "UPDATE comments SET status = 0 WHERE post = '$idPost'");
+    $sql = "UPDATE posts SET status = 0 WHERE id = ?";
+    $vars = [$idPost];
+    $varsType = "i";
+    executeStmt($db, $sql, $varsType, $vars, false);
+
+    $sql = "UPDATE comments SET status = 0 WHERE post = ?";
+    executeStmt($db, $sql, $varsType, $vars, false);
 
     header("Location: /");
 } else {

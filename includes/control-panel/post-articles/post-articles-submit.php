@@ -19,11 +19,11 @@ if (isset($_POST['post-article-submit'])) {
 
     // variables containing all post infos
     $uid = $_SESSION['uid'];
-    $title = mysqli_real_escape_string($db, $_POST['title']);
-    $content = mysqli_real_escape_string($db, $_POST['content']);
-    $type = mysqli_real_escape_string($db, $_POST['type']);
-    $desc = mysqli_real_escape_string($db, $_POST['desc']);
-    $topic = mysqli_real_escape_string($db, $_POST['topic']);
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $type = $_POST['type'];
+    $desc = $_POST['desc'];
+    $idTopic = $_POST['topic'];
     $image = $_FILES['image']['name'];
     $imageTmp = $_FILES['image']['tmp_name'];
 
@@ -33,14 +33,14 @@ if (isset($_POST['post-article-submit'])) {
     // if not every field is filled
     if (empty($title) || empty($content) || empty($type)) {
         $_SESSION['content'] = $content;
-        header("Location: /control-panel?post-article&error=empty-fields$redirect&title=$title&type=$type&topic=$topic&desc=$desc");
+        header("Location: /control-panel?post-article&error=empty-fields$redirect&title=$title&type=$type&topic=$idTopic&desc=$desc");
         exit();
     }
 
     // if the topic hasn't been chosen
-    if ($topic == "not-chosen") {
+    if ($idTopic == "not-chosen") {
         $_SESSION['content'] = $content;
-        header("Location: /control-panel?post-article&error=topic-not-chosen$redirect&title=$title&type=$type&topic=$topic&desc=$desc");
+        header("Location: /control-panel?post-article&error=topic-not-chosen$redirect&title=$title&type=$type&topic=$idTopic&desc=$desc");
         exit();
     }
 
@@ -50,7 +50,7 @@ if (isset($_POST['post-article-submit'])) {
         $imageExt = pathinfo($image, PATHINFO_EXTENSION);
         if ($imageExt != "jpg" && $imageExt != "jpeg" && $imageExt != "png") {
             $_SESSION['content'] = $content;
-            header("Location: /control-panel?post-article&error=image-file-not-supported$redirect&title=$title&type=$type&topic=$topic&desc=$desc");
+            header("Location: /control-panel?post-article&error=image-file-not-supported$redirect&title=$title&type=$type&topic=$idTopic&desc=$desc");
             exit();
         }
         $imageSource = $imageTmp;
@@ -68,27 +68,32 @@ if (isset($_POST['post-article-submit'])) {
     // format the title
     $titleFormatted = format($title, true);
 
-    // gets the id of the topic
-    $resultTopic = mysqli_query($db, $sql = "SELECT id FROM topics WHERE topic = '$topic' AND status = 1");
-    $rowTopic = mysqli_fetch_assoc($resultTopic);
-    $idTopic = $rowTopic['id'];
-
     // insert data into the db if the post is being created
     if ($_POST['idPost'] == 0) {
-        mysqli_query($db, $sql = "INSERT INTO posts (author, title, content, topic, type, description, image) VALUES ('$uid', '$title', '$content', '$idTopic', '$type', '$desc', '$imageExt')");
+        $sql = "INSERT INTO posts (author, title, content, topic, type, description, image) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $vars = [$uid, $title, $content, $idTopic, $type, $desc, $imageExt];
+        $varsType = "ississs";
+        executeStmt($db, $sql, $varsType, $vars, false);
 
         // id of the just created article
         $idPost = mysqli_insert_id($db);
     } else {
         // edit the data if the post is being edited
-        $idPost = mysqli_real_escape_string($db, $_POST['idPost']);
+        $idPost = $_POST['idPost'];
 
-        $resultOld = mysqli_query($db, $sql = "SELECT title, image FROM posts WHERE id = '$idPost'");
+        $sql = "SELECT title, image FROM posts WHERE id = ?";
+        $vars = [$idPost];
+        $varsType = "i";
+        $resultOld = executeStmt($db, $sql, $varsType, $vars);
+
         $rowOld = mysqli_fetch_assoc($resultOld);
         $oldTitle = $rowOld['title'];
         $oldTitle = format($oldTitle, true);
 
-        mysqli_query($db, $sql = "UPDATE posts SET title = '$title', content = '$content', topic = '$idTopic', type = '$type', description = '$desc', image = '$imageExt' WHERE id = '$idPost'");
+        $sql = "UPDATE posts SET title = ?, content = ?, topic = ?, type = ?, description = ?, image = ? WHERE id = ?";
+        $vars = [$title, $content, $idTopic, $type, $desc, $imageExt, $idPost];
+        $varsType = "ssisssi";
+        executeStmt($db, $sql, $varsType, $vars, false);
     }
 
     $target = "../../../posts/$titleFormatted-$idPost";

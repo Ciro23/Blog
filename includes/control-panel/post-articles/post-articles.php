@@ -62,8 +62,8 @@ $(document).ready(function() {
                     $resultTopics = mysqli_query($db, $sql = "SELECT id, topic FROM topics WHERE status = 1");
 
                     while ($rowTopics = mysqli_fetch_assoc($resultTopics)) {
-                        $topicName = $rowTopics['topic'];
                         $idTopic = $rowTopics['id'];
+                        $topicName = $rowTopics['topic'];
 
                         if ($topic == $idTopic) {
                             $selected = "selected";
@@ -71,7 +71,7 @@ $(document).ready(function() {
                             $selected = "";
                         }
 
-                        echo "<option value='$topicName' $selected>$topicName</option>";
+                        echo "<option value='$idTopic' $selected>$topicName</option>";
                     }
                     ?>
                 </select>

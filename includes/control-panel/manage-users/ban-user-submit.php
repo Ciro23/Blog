@@ -19,7 +19,10 @@ if (isset($_POST['ban-user-submit'])) {
     $page = $_POST['page'];
 
     // edit the role of the user in the db
-    mysqli_query($db, $sql = "UPDATE users SET isBanned = !$isBanned WHERE id = $uid");
+    $sql = "UPDATE users SET isBanned = ? WHERE id = ?";
+    $vars = [!$isBanned, $uid];
+    $varsType = "ii";
+    executeStmt($db, $sql, $varsType, $vars, false);
 
     header("Location: /control-panel?manage-users&user-banned-successfully&search=$search&sort=$sort&page=$page");
 

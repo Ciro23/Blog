@@ -9,10 +9,14 @@ if (isset($_POST['comment-delete-submit'])) {
         exit();
     }
 
-    $idComment = mysqli_real_escape_string($db, $_POST['idComment']);
+    $idComment = $_POST['idComment'];
 
     // gets the post id and author
-    $resultComment = mysqli_query($db, $sql = "SELECT post, author FROM comments WHERE id = '$idComment'");
+    $sql = "SELECT post, author FROM comments WHERE id = ?";
+    $vars = [$idComment];
+    $varsType = "i";
+    $resultComment = executeStmt($db, $sql, $varsType, $vars);
+
     $rowComment = mysqli_fetch_assoc($resultComment);
     $idPost = $rowComment['post'];
 
@@ -28,7 +32,8 @@ if (isset($_POST['comment-delete-submit'])) {
         exit();
     }
 
-    mysqli_query($db, $sql = "UPDATE comments SET status = 0, content = '[deleted]' WHERE id = '$idComment'");
+    $sql = "UPDATE comments SET status = 0, content = '[deleted]' WHERE id = ?";
+    executeStmt($db, $sql, $varsType, $vars, false);
 
     header("Location: /posts/$titleFormatted-$idPost#comments");
 } else {

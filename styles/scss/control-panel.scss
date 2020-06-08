@@ -632,4 +632,8 @@ html.dark #following:after {
 html.dark #current-page {
     border-color: $mainLight;
 }
+
+html.dark #no-match {
+    color: $thirdLight;
+}
 // end of dark colors

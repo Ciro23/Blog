@@ -491,4 +491,7 @@ html.dark #following:after {
 html.dark #current-page {
   border-color: #f9f9f9; }
 
+html.dark #no-match {
+  color: #CCCCCC; }
+
 /*# sourceMappingURL=control-panel.css.map */

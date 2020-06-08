@@ -4,7 +4,7 @@ require "../includes/general/db_conn.php";
 require "../includes/general/common.php";
 require "../includes/general/php-functions.php";
 require "../includes/general/js-functions.php";
-require "../includes/general/menu.php";
+include "../includes/general/menu.php";
 ?>
 <html lang="en">
     <head>

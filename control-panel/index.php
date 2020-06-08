@@ -67,25 +67,9 @@ if (isset($_GET['error'])) {
 }
 
 if (isset($_GET['post-article'])) {
-    // gets the post info if edit is activated
-    if (isset($_GET['edit'])) {
-        $postOrEdit = "Edit";
 
-        $idPost = $_GET['idPost'];
-        $resultPost = mysqli_query($db, $sql = "SELECT * FROM posts WHERE id = '$idPost'");
-        $rowPost = mysqli_fetch_assoc($resultPost);
-
-        $title = addslashes($rowPost['title']);
-        $content = addslashes($rowPost['content']);
-        $type = addslashes($rowPost['type']);
-        $topic = addslashes($rowPost['topic']);
-        $desc = addslashes($rowPost['description']);
-
-    } else {
-        $idPost = 0;
-        $postOrEdit = "Post";
-
-        // gets the form fields if some error occured
+    // gets the form fields if some error occured
+    if (isset($_GET['error'])) {
         if (isset($_GET['title'])) {
             $title = $_GET['title'];
         }
@@ -106,15 +90,56 @@ if (isset($_GET['post-article'])) {
             $desc = $_GET['desc'];
         }
     }
+
+    // gets the post info if edit is activated
+    if (isset($_GET['edit'])) {
+        $idPost = $_GET['idPost'];
+        $postOrEdit = "Edit";
+
+        if (!isset($_GET['error'])) {
+            $sql = "SELECT * FROM posts WHERE id = '$idPost'";
+            $vars = [$idPost];
+            $varsType = "i";
+            $resultPost = executeStmt($db, $sql, $varsType, $vars);
+
+            $rowPost = mysqli_fetch_assoc($resultPost);
+
+            $title = $rowPost['title'];
+            $content = $rowPost['content'];
+            $type = $rowPost['type'];
+            $topic = $rowPost['topic'];
+            $desc = $rowPost['description'];
+        }
+    } else {
+        $idPost = 0;
+        $postOrEdit = "Post";
+    }
+
+    // escapes double quotes
+    $title = addslashes($title);
+    $content = addslashes($content);
+    $type = addslashes($type);
+    $topic = addslashes($topic);
+    $desc = addslashes($desc);
+
 } else if (isset($_GET['manage-users'])) {
 
     // gets the user search if exists
     if (isset($_GET['search']) && $_GET['search'] != "") {
         $search = $_GET['search'];
-        $where = "AND username LIKE '%$search%'";
+        $where = "AND username LIKE ?";
     }
 
-    $total = mysqli_query($db, $sql = "SELECT id FROM users WHERE status = 1 AND username != '{$_SESSION['uname']}' $where");
+    $sql = "SELECT id FROM users WHERE status = 1 AND username != '{$_SESSION['uname']}' $where";
+    if ($search != "") {
+        $vars = ["%$search%"];
+        $varsType = "s";
+        $total = executeStmt($db, $sql, $varsType, $vars);
+    } else {
+        $total = mysqli_query($db, $sql);
+    }
+    
+    
     $totalCount = mysqli_num_rows($total);
 
     $totalPages = ceil($totalCount / $elementsPerPage);
@@ -129,11 +154,6 @@ if (isset($_GET['post-article'])) {
     }
 
     $offset = ($currentPage - 1) * $elementsPerPage;
-
-    // if the user is viewing a page that doesn't exists
-    if ($currentPage > $totalPages) {
-        header("Location: ?manage-users&page=$totalPages");
-    }
 
     if ($currentPage - 2 < 1 || $currentPage == 2) {
         $minPage = 1;

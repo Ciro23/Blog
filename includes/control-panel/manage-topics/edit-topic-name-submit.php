@@ -34,9 +34,12 @@ if (isset($_POST['edit-topic-name-submit'])) {
     }
 
     // if the new topic name already exists
-    $resultTopic = mysqli_query($db, $sql = "SELECT topic FROM topics WHERE topic = '$newNameOnlySpecialChars'");
-    $resultCheckTopic = mysqli_num_rows($resultTopic);
-    if ($resultCheckTopic > 0) {
+    $sql = "SELECT topic FROM topics WHERE topic = ?";
+    $vars = [$newNameOnlySpecialChars];
+    $varsType = "s";
+    $resultTopic = executeStmt($db, $sql, $varsType, $vars);
+
+    if (mysqli_num_rows($resultTopic) > 0) {
         header("Location: /control-panel?manage-topics&error=topic-already-exists");
         exit();
     }
@@ -45,7 +48,10 @@ if (isset($_POST['edit-topic-name-submit'])) {
     rename("../../../topics/$oldNameFormatted", "../../../topics/$newNameFormatted");
 
     // change the name of the topic in the db
-    mysqli_query($db, $sql = "UPDATE topics SET topic = '$newNameOnlySpecialChars' WHERE topic = '$oldName'");
+    $sql = "UPDATE topics SET topic = ? WHERE topic = ?";
+    $vars = [$newNameOnlySpecialChars, $oldName];
+    $varsType = "ss";
+    $resultTopic = executeStmt($db, $sql, $varsType, $vars, false);
 
     header("Location: /control-panel?manage-topics&topic-renamed-successfully");
 

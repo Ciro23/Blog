@@ -12,10 +12,14 @@ if (isset($_POST['comment-submit'])) {
     // all comment infos
     $uid = $_SESSION['uid'];
     $comment = $_POST['comment'];
-    $idPost = mysqli_real_escape_string($db, $_POST['idPost']);
+    $idPost = $_POST['idPost'];
 
     // gets the info of the post
-    $resultPost = mysqli_query($db, $sql = "SELECT title, topic FROM posts WHERE id = '$idPost'");
+    $sql = "SELECT title, topic FROM posts WHERE id = ?";
+    $vars = [$idPost];
+    $varsType = "i";
+    $resultPost = executeStmt($db, $sql, $varsType, $vars);
+
     $rowPost = mysqli_fetch_assoc($resultPost);
 
     $title = $rowPost['title'];
@@ -46,10 +50,11 @@ if (isset($_POST['comment-submit'])) {
         $comment = substr($comment, 0, 2000);
     }
 
-    $comment = mysqli_real_escape_string($db, $comment);
-
     // insert the comment into the db
-    mysqli_query($db, $sql = "INSERT INTO comments (author, post, content, topic) VALUES ('$uid', '$idPost', '$comment', '$idTopic')");
+    $sql = "INSERT INTO comments (author, post, content, topic) VALUES (?, ?, ?, ?)";
+    $vars = [$uid, $idPost, $comment, $idTopic];
+    $varsType = "iisi";
+    executeStmt($db, $sql, $varsType, $vars, false);
 
     header("Location: /posts/$titleFormatted-$idPost#comment");
 } else {

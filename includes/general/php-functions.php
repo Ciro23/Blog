@@ -4,6 +4,20 @@ if (!isset($includeCheck)) {
     exit();
 }
 
+function executeStmt($db, $sql, $varstype, $vars, $getResult = true) {
+    $stmt = mysqli_stmt_init($db);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, $varstype, ...$vars);
+    mysqli_stmt_execute($stmt);
+
+    if ($getResult) {
+        $resultComment = mysqli_stmt_get_result($stmt);
+        mysqli_stmt_close($stmt);
+        return $resultComment;
+    }
+    mysqli_stmt_close($stmt);
+}
+
 function format($str, $clear = false, $link = true) {
     if ($link) {
         $formatted = strtolower($str);

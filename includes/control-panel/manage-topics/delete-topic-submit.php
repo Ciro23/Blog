@@ -13,9 +13,13 @@ if (isset($_POST['delete-topic-submit'])) {
     $idTopic = $_POST['id'];
 
     // gets the name of the topic
-    $resultTopic = mysqli_query($db, $sql = "SELECT id FROM topics WHERE id = $idTopic");
-    $rowTopic = mysqli_fetch_assoc($resultTopic);
-    $topic = $rowTopic['id'];
+    $sql = "SELECT id FROM topics WHERE id = ? AND status = 1";
+    $vars = [$idTopic];
+    $varsType = "s";
+    $result = executeStmt($db, $sql, $varsType, $vars);
+
+    $row = mysqli_fetch_assoc($result);
+    $topic = $row['id'];
 
     // completely formats the old name
     $topicFormatted = format($topic);
@@ -25,11 +29,16 @@ if (isset($_POST['delete-topic-submit'])) {
     rmdir("../../../topics/$topicFormatted");
 
     // hides everything about the topic in the db
-    mysqli_query($db, $sql = "UPDATE topics SET status = 0 WHERE id = '$idTopic'");
-    mysqli_query($db, $sql = "UPDATE posts SET status = 0 WHERE topic = '$idTopic'");
-    mysqli_query($db, $sql = "UPDATE comments SET status = 0 WHERE topic = '$idTopic'");
+    $sql = "UPDATE topics SET status = 0 WHERE id = ?";
+    $result = executeStmt($db, $sql, $varsType, $vars);
 
-    //header("Location: /control-panel?manage-topics&topic-deleted-successfully");
+    $sql = "UPDATE posts SET status = 0 WHERE topic = ?";
+    $result = executeStmt($db, $sql, $varsType, $vars);
+
+    $sql = "UPDATE comments SET status = 0 WHERE topic = ?";
+    $result = executeStmt($db, $sql, $varsType, $vars);
+
+    header("Location: /control-panel?manage-topics&topic-deleted-successfully");
 
 } else {
     header("Location: /404");

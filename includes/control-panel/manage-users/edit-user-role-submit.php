@@ -19,7 +19,10 @@ if (isset($_POST['role'])) {
     $page = $_POST['page'];
 
     // edit the role of the user in the db
-    mysqli_query($db, $sql = "UPDATE users SET role = $role WHERE id = $uid");
+    $sql = "UPDATE users SET role = ? WHERE id = ?";
+    $vars = [$role, $uid];
+    $varsType = "si";
+    executeStmt($db, $sql, $varsType, $vars, false);
 
     header("Location: /control-panel?manage-users&user-role-changed-successfully&search=$search&sort=$sort&page=$page");
 

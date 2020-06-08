@@ -27,7 +27,9 @@ $sort = $_POST['sort'];
 
 // if a search is submitted
 if ($search != "") {
-    $where = "AND username LIKE '%$search%'";
+    $where = "AND username LIKE ?";
+    $vars = ["%$search%"];
+    $varsType = "s";
 } else {
     $where = "";
 }
@@ -64,11 +66,11 @@ $(document).ready(function() {
     <h1>Manage users</h1>
     <form class="first-form" method="get">
         <input type="hidden" name="manage-users">
-        <input type="hidden" name="sort" value="<?= $sort ?>">
         <input type="text" name="search" placeholder="Search for an user" value="<?= $search ?>">
         <button type="file" title="Search user">
             <img src="/png_icons/search.png">
         </button>
+        <input type="hidden" name="sort" value="<?= $sort ?>">
     </form>
 
     <hr id="hr-topics-users">
@@ -76,6 +78,7 @@ $(document).ready(function() {
     <form class="sort-results" method="get">
         <input type="hidden" name="manage-users">
         <label>Sort by</label>
+        <input type="hidden" name="search" value="<?= $search ?>">
         <select name="sort" onchange="this.form.submit()">
             <option value="alphabetically" <?= $sortSelected1 ?>>Alphabetically</option>
             <option value="newers" <?= $sortSelected2 ?>>Newers</option>
@@ -86,7 +89,14 @@ $(document).ready(function() {
     </form>
 
     <?php
-    $resultUsers = mysqli_query($db, $sql = "SELECT id, username, role, isBanned FROM users WHERE status = 1 AND username != '{$_SESSION['uname']}' $where $sortSql LIMIT $elementsPerPage OFFSET $offset");
+    $sql = "SELECT id, username, role, isBanned FROM users WHERE status = 1 AND username != '{$_SESSION['uname']}' $where $sortSql LIMIT $elementsPerPage OFFSET $offset";
+    
+    if ($search != "") {
+        $resultUsers = executeStmt($db, $sql, $varsType, $vars);
+    } else {
+        $resultUsers = mysqli_query($db, $sql);
+    }
+
     $resultUsersCheck = mysqli_num_rows($resultUsers);
 
     if ($resultUsersCheck > 0) {
@@ -170,7 +180,7 @@ $(document).ready(function() {
 
         if ($currentPage > 1) {
             $prev = $currentPage - 1;
-            echo "<a href='?manage-users&sort=$sort&page=$prev' id='prev'></a>";
+            echo "<a href='?manage-users&search=$search&sort=$sort&page=$prev' id='prev'></a>";
         }
 
         for ($i = $minPage; $i <= $maxPage; $i++) {
@@ -181,17 +191,17 @@ $(document).ready(function() {
                 $class = "";
             }
 
-            echo "<a href='?manage-users&sort=$sort&page=$i' $class>$i</a> ";
+            echo "<a href='?manage-users&search=$search&sort=$sort&page=$i' $class>$i</a> ";
         }
 
         if ($currentPage < $totalPages) {
             $following = $currentPage + 1;
-            echo "<a href='?manage-users&sort=$sort&page=$following' id='following'></a>";
+            echo "<a href='?manage-users&search=$search&sort=$sort&page=$following' id='following'></a>";
         }
 
     echo "</div>";
     } else {
-        echo "<p>No match</p>";
+        echo "<p id='no-match'>No match</p>";
     }
     ?>
 </div>

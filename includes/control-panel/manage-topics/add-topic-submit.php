@@ -25,7 +25,10 @@ if (isset($_POST['add-topic-submit'])) {
     }
 
     // if the topic already exists
-    $result = mysqli_query($db, $sql = "SELECT id FROM topics WHERE topic = '$topic' AND status = 1");
+    $sql = "SELECT id FROM topics WHERE topic = ? AND status = 1";
+    $vars = [$topic];
+    $varsType = "s";
+    $result = executeStmt($db, $sql, $varsType, $vars);
     $resultCheck = mysqli_num_rows($result);
     if ($resultCheck > 0) {
         header("Location: /control-panel?manage-topics&error=topic-already-exists");
