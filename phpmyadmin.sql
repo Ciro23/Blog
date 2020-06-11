@@ -28,7 +28,7 @@ CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `author` int(11) NOT NULL,
   `post` int(11) NOT NULL,
-  `date` datetime DEFAULT current_timestamp(),
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
   `content` text NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `topic` tinyint(1) NOT NULL
@@ -42,7 +42,7 @@ CREATE TABLE `posts` (
   `title` varchar(100) NOT NULL,
   `content` mediumtext NOT NULL,
   `topic` varchar(20) DEFAULT NULL,
-  `date` datetime DEFAULT current_timestamp(),
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
   `type` varchar(20) NOT NULL,
   `description` varchar(256) DEFAULT NULL,
   `image` varchar(20) NOT NULL,
