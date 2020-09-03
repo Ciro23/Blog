@@ -216,7 +216,7 @@ $totalResultCount = mysqli_num_rows($totalResult);
                             <a href='{$info['url']}'>
                                 <div class='img' style='background-image: url({$info['url']}/thumbnail.{$info['image']})'></div>
                                 <div class='p-shadow'>
-                                    <p><b>Switch</b><br>{$info['type']}</p>
+                                    <p><b>{$info['topic']}</b><br>{$info['type']}</p>
                                 </div>
                                 <div class='h2-shadow'>
                                     <h2>{$info['title']}</h2>
