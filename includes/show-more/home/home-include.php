@@ -8,7 +8,7 @@ if (isset($includeCheck)) {
         echo "
         <div class='grid-box'>
             <div class='category'>
-                <a href='{$info['url']}'><p>{$info['topic']}</p></a>
+                <a href='/topics/{$info['topicFormatted']}'><p>{$info['topic']}</p></a>
             </div>
             <div class='img-box'>
                 <a href='{$info['url']}'>
